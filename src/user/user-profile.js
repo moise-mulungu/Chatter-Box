@@ -39,6 +39,10 @@ const UserProfile = ({ setSelectedUser, setProfileVisible, isActive }) => {
   }, [user])
 
   const updateProfileAndFirestore = async (userPhotoUrl) => {
+    if (!user || !user.uid) {
+      console.error('User or user.uid is not defined')
+      return
+    }
     await updateProfile(user, {
       displayName,
       photoURL: userPhotoUrl,
